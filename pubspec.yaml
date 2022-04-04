@@ -12,12 +12,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_signature_pad: ^3.0.0
-  font_awesome_flutter: ^9.2.0
   get: ^4.6.1
   get_storage: ^2.0.3
   google_fonts: ^2.2.0
-  supabase: ^0.2.15
+  #supabase: ^0.2.15
+  supabase_flutter: ^0.2.12
   
 dev_dependencies:
   flutter_lints: ^1.0.0

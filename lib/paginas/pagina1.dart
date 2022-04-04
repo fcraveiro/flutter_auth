@@ -32,7 +32,7 @@ class _Pagina1State extends State<Pagina1> {
               },
               child: ElevatedButton(
                 onPressed: () => {},
-                child: const Text('click'),
+                child: const Text('SignUp'),
               ),
             ),
           ],
@@ -41,3 +41,92 @@ class _Pagina1State extends State<Pagina1> {
     );
   }
 }
+
+/*
+  Future<void> signUp() async {
+    final response =
+        await cliente.auth.signUp('eletroluke@hotmail.com', '123456');
+
+    if (response.error != null) {
+      log(response.error.toString());
+      // ERROR: Prompt the user to try again!
+    } else {
+      // SUCCESS: User and session available!
+      final User? user = response.user;
+      log(user.toString());
+      log(user!.email.toString());
+      final Session? session = response.data;
+      log(session.toString());
+      log(user.emailConfirmedAt.toString());
+      log(user.aud);
+      log(user.id);
+      log(user.toJson().toString());
+      log(user.runtimeType.toString());
+      log(user.lastSignInAt.toString());
+    }
+  }
+
+  Future<void> signIn() async {
+    final response = await cliente.auth.signIn(
+      email: 'eletroluke@hotmail.com',
+      password: '123456',
+    );
+
+    if (response.error != null) {
+      log(response.error.toString());
+      // ERROR: Prompt the user to try again!
+    } else {
+      // SUCCESS: User and session available!
+      final User? user = response.user;
+      log(user.toString());
+      log(user!.email.toString());
+      final Session? session = response.data;
+      log(session.toString());
+      log(user.emailConfirmedAt.toString());
+      log(user.aud);
+      log(user.id);
+      log(user.toJson().toString());
+      log(user.runtimeType.toString());
+      log(user.lastSignInAt.toString());
+    }
+  }
+
+  Future<void> sair() async {
+    final response = await cliente.auth.signOut();
+    if (response.error != null) {
+      log(response.error.toString());
+      // ERROR: Prompt the user to try again!
+    } else {
+      log('sei la');
+      // ERROR: Prompt the user to try again!
+    }
+  }
+
+  Future<void> sair3() async {
+    final response = await cliente.auth.signIn();
+    if (response.error != null) {
+      log(response.error.toString());
+      // ERROR: Prompt the user to try again!
+    } else {
+      log('sei la');
+      // ERROR: Prompt the user to try again!
+    }
+  }
+
+  Future<void> entrarGoogle() async {
+    var authRedirectUri = 'com.example.flutter_auth://menu';
+    final response = await cliente.auth.signIn(
+      provider: Provider.google,
+      options: AuthOptions(redirectTo: authRedirectUri),
+    );
+    if (response.error != null) {
+      log(response.error.toString());
+      // ERROR: Prompt the user to try again!
+    } else {
+      log('sei la');
+      log(response.error.toString());
+
+      // ERROR: Prompt the user to try again!
+    }
+  }
+*/
