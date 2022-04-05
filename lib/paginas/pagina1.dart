@@ -1,7 +1,6 @@
+import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:supabase/supabase.dart';
-import '../services/config.cfg';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class Pagina1 extends StatefulWidget {
   const Pagina1({Key? key}) : super(key: key);
@@ -10,35 +9,103 @@ class Pagina1 extends StatefulWidget {
   State<Pagina1> createState() => _Pagina1State();
 }
 
+final GoogleSignIn _googleSignIn = GoogleSignIn(
+  scopes: [
+    'email',
+  ],
+);
+
 class _Pagina1State extends State<Pagina1> {
-  SupabaseClient cliente = SupabaseClient(supabaseUrl, supabaseKey);
+//  SupabaseClient cliente = SupabaseClient(supabaseUrl, supabaseKey);
+
+  GoogleSignInAccount? _currentUser;
+
+  @override
+  void initState() {
+    _googleSignIn.onCurrentUserChanged.listen((account) {
+      setState(() {
+        _currentUser = account;
+      });
+    });
+    _googleSignIn.signInSilently();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Pagina 1'),
+        title: const Text('Pagina 2'),
       ),
       body: Center(
+        child: teste(),
+      ),
+    );
+  }
+
+  teste() {
+    GoogleSignInAccount? user = _currentUser;
+    if (user != null) {
+      log(user.toString());
+      return Padding(
+        padding: const EdgeInsets.all(12),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
           children: [
+            ListTile(
+              leading: GoogleUserCircleAvatar(identity: user),
+              title: const Text('user.displayName ?? '),
+              subtitle: const Text('user.email'),
+            ),
             const SizedBox(
-              height: 65,
+              height: 20,
+            ),
+            const Text('Sucesso'),
+            const SizedBox(
+              height: 10,
             ),
             ElevatedButton(
-              onPressed: () {
-                Get.back();
-              },
-              child: ElevatedButton(
-                onPressed: () => {},
-                child: const Text('SignUp'),
-              ),
+              onPressed: signOut,
+              child: const Text('Sair'),
             ),
           ],
         ),
-      ),
-    );
+      );
+    } else {
+      return Padding(
+        padding: const EdgeInsets.all(12),
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 20,
+            ),
+            const Text('Voce não está Logado'),
+            const SizedBox(
+              height: 10,
+            ),
+            ElevatedButton(
+              onPressed: () {
+                signIn();
+              },
+              child: const Text('Entrar'),
+            ),
+          ],
+        ),
+      );
+    }
+  }
+
+  void signOut() {
+    _googleSignIn.disconnect();
+  }
+
+  Future<void> signIn() async {
+    log('aqui');
+    try {
+      await _googleSignIn.signIn();
+      log('aqui 2');
+    } catch (e) {
+      log(e.toString());
+    }
   }
 }
 

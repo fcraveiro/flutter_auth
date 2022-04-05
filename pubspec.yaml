@@ -16,8 +16,9 @@ dependencies:
   get_storage: ^2.0.3
   google_fonts: ^2.2.0
   #supabase: ^0.2.15
-  supabase_flutter: ^0.2.12
-  
+  #supabase_flutter: ^0.2.12
+  google_sign_in: ^5.2.4
+
 dev_dependencies:
   flutter_lints: ^1.0.0
   flutter_test:
